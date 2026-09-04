@@ -35,18 +35,18 @@ export default function FormBabyProfile() {
                         <div>
                             <label htmlFor="jenisKelaminBayi"
                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis kelamin bayi</label>
-                                                        <div className="flex items-center">
+                              <div className="flex items-center">
                                 <input type="radio" name="jenisKelaminBayi" id="jenisKelaminBayi"
-                                                                        className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
-                                                            <label htmlFor="jenisKelaminBayi" className="ml-2 text-sm font-medium text-gray-900 dark:text-white">Laki-laki</label>
-                            </div>
-                                                        <div className="flex items-center">
+                                <label htmlFor="jenisKelaminBayi" className="ml-2 text-sm font-medium text-gray-900 dark:text-white">Laki-laki</label>
+                              </div>
+                              <div className="flex items-center">
                                 <input type="radio" name="jenisKelaminBayi" id="jenisKelaminBayi2"
-                                                                        className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                               />
-                                                            <label htmlFor="jenisKelaminBayi2" className="ml-2 text-sm font-medium text-gray-900 dark:text-white">Perempuan</label>
-                            </div>
+                                <label htmlFor="jenisKelaminBayi2" className="ml-2 text-sm font-medium text-gray-900 dark:text-white">Perempuan</label>
+                              </div>
                         </div>
 
                         <div>
