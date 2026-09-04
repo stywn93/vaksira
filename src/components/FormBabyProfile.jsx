@@ -118,9 +118,6 @@ export default function FormBabyProfile() {
                                   Simpan & Generate
                             
                         </button>
-                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Belum punya akun?
-                        </p>
                     </form>
                 </div>
             </div>
