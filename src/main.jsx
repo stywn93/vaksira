@@ -1,12 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './App.css'
 import App from './App.jsx'
 import FormGenerateReminder from './FormGenerateReminder.jsx'
+import FormBabyProfile from './components/FormBabyProfile'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-
-    <FormGenerateReminder />
+    {/* <FormGenerateReminder /> */}
+    <FormBabyProfile />
   </StrictMode>,
 )
