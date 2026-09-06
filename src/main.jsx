@@ -6,7 +6,6 @@ import FormGenerateReminder from './FormGenerateReminder.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-
     <FormGenerateReminder />
-  </StrictMode>,
+  </StrictMode>
 )
