@@ -1,10 +1,8 @@
-import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import FormBabyProfile from './components/FormBabyProfile'
 import { submitBabyProfile } from './libs/hooks/useBabyProfile'
 
 function FormGenerateReminder() {
-  const [error, setError] = useState("")
-
   const handleSubmit = async (event) => {
     // console.log("handleSubmit called")
     event.preventDefault()
@@ -16,11 +14,9 @@ function FormGenerateReminder() {
       await submitBabyProfile({
         data
        })
-
-       event.currentTarget.reset()
-       alert("Profil bayi berhasil disimpan. ")
+      //  toast.success("Profil bayi berhasil disimpan.")
     } catch(submitError) {
-      setError(submitError.message)
+      toast.error(submitError.message)
     }
   }
 

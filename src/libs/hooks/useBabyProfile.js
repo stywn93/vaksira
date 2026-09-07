@@ -1,8 +1,7 @@
 import {insertBaby} from "../api/Baby.js"
+import { toast } from 'react-hot-toast'
 
 export async function submitBabyProfile({ data }) {
-    // console.log("submitBabyProfile called")
-    // console.log(data)
     const payload = {
         motherName: data.namaIbu,
         dobBaby: data.tanggalLahirBayi,
@@ -14,12 +13,15 @@ export async function submitBabyProfile({ data }) {
         email: data.email,
     }
 
-    console.log("payload:", payload)
+    // console.log("payload:", payload)
 
     const response = await insertBaby(payload)
     const body = await response.json()
+    console.log(body)
 
-    if(!response.ok || body?.status!== "success"){
-        throw new Error(body?.message ?? "Gagal menyimpan profil bayi.")
+    if(body.status == "success"){
+        toast.success("Profil bayi berhasil disimpan.")
+    } else {
+        toast.error("Gagal menyimpan profil bayi.")
     }
 }
