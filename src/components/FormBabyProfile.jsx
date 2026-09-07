@@ -1,6 +1,6 @@
 import logoUrl from "../../public/favicon.svg"
 
-export default function FormBabyProfile() {
+export default function FormBabyProfile({onSubmit}) {
   return (
     <section>
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -14,7 +14,7 @@ export default function FormBabyProfile() {
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Buat Profil Bayi
                     </h1>
-                    <form className="space-y-4 md:space-y-6">
+                    <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -25,6 +25,7 @@ export default function FormBabyProfile() {
                                 <input type="text" name="namaIbu" id="namaIbu"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Masukkan nama ibu"
+                                    required=""
                                 />
                             </div>
 
@@ -41,13 +42,13 @@ export default function FormBabyProfile() {
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis kelamin bayi</label>
                                 <div className="flex items-center gap-6">
                                     <div className="flex items-center">
-                                        <input type="radio" name="jenisKelaminBayi" id="jenisKelaminBayi"
+                                        <input type="radio" name="jenisKelaminBayi" value="L" id="jenisKelaminBayi"
                                             className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                         />
                                         <label htmlFor="jenisKelaminBayi" className="ml-2 text-sm font-medium text-gray-900 dark:text-white">Laki-laki</label>
                                     </div>
                                     <div className="flex items-center">
-                                        <input type="radio" name="jenisKelaminBayi" id="jenisKelaminBayi2"
+                                        <input type="radio" name="jenisKelaminBayi" value="P" id="jenisKelaminBayi2"
                                             className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                         />
                                         <label htmlFor="jenisKelaminBayi2" className="ml-2 text-sm font-medium text-gray-900 dark:text-white">Perempuan</label>
