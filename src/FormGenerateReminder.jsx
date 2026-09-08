@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast'
 import FormBabyProfile from './components/FormBabyProfile'
 import { submitBabyProfile } from './libs/hooks/useBabyProfile'
+import { useNavigate } from 'react-router-dom'
 
 import { useState } from "react"
 
@@ -8,6 +9,7 @@ import { useState } from "react"
 function FormGenerateReminder() {
   const [token, setToken] = useState(null)
   const [recaptchaKey, setRecaptchaKey] = useState(0)
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -24,6 +26,7 @@ function FormGenerateReminder() {
       await submitBabyProfile({
         data,
         token,
+        navigate,
         reset: () => {
           form.reset()
           setToken(null)
