@@ -9,7 +9,7 @@ function FormGenerateReminder() {
     const formData = new FormData(event.currentTarget)
     const data = Object.fromEntries(formData.entries())
 
-    // console.log(data)
+    console.log(data)
     try {
       await submitBabyProfile({
         data

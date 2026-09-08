@@ -7,6 +7,7 @@ export async function submitBabyProfile({ data }) {
         dobBaby: data.tanggalLahirBayi,
         genderBaby: data.jenisKelaminBayi,
         district: data.kabupaten,
+        province: data.provinsi,
         subdistrict: data.kecamatan,
         village: data.desa,
         whatsapp: data.nomorWhatsapp,
