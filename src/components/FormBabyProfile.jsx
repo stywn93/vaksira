@@ -144,10 +144,10 @@ export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptcha
 
                         </div>
 
-                        <div className="flex justify-end">
-                            <a href="#"
-                            className="text-sm font-medium text-indigo-600 hover:underline">Sudah pernah buat? Klik di sini</a>
-                        </div>
+                        {/* <div className="flex justify-end">
+                            <Link to="/immunization-schedule"
+                            className="text-sm font-medium text-indigo-600 hover:underline">Sudah pernah buat? Klik di sini</Link>
+                        </div> */}
                         <button type="submit"
                                 className="cursor-pointer w-full text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
                             Simpan & Generate
