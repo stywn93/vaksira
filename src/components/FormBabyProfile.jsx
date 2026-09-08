@@ -1,7 +1,14 @@
 import logoUrl from "../../public/favicon.svg"
 import { Toaster } from "react-hot-toast"
+import { useWilayah } from "../libs/hooks/useWilayah.js"
 
 export default function FormBabyProfile({onSubmit}) {
+  const {
+    provinces, districts, subdistricts, villages,
+    province, district, subdistrict, village,
+    handleProvinceChange, handleDistrictChange, handleSubdistrictChange, setVillage,
+  } = useWilayah()
+
   return (
     <section>
         <Toaster position="top-center" />
@@ -58,44 +65,49 @@ export default function FormBabyProfile({onSubmit}) {
                                 </div>
                             </div>
 
-                            {/* Row 2: Kabupaten | Kecamatan */}
+                            {/* Row 2: Provinsi | Kabupaten */}
+                            <div>
+                                <label htmlFor="provinsi"
+                                    className="block mb-2 text-sm font-medium text-gray-900">Provinsi</label>
+                                <select name="provinsi" id="provinsi" value={province} onChange={handleProvinceChange}
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
+                                >
+                                    <option value="">Pilih provinsi</option>
+                                    {provinces.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
+                                </select>
+                            </div>
+
                             <div>
                                 <label htmlFor="kabupaten"
                                     className="block mb-2 text-sm font-medium text-gray-900">Kabupaten</label>
-                                <select name="kabupaten" id="kabupaten"
+                                <select name="kabupaten" id="kabupaten" value={district} onChange={handleDistrictChange} disabled={!province}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                                 >
                                     <option value="">Pilih kabupaten</option>
-                                    <option value="kabupaten1">Kabupaten 1</option>
-                                    <option value="kabupaten2">Kabupaten 2</option>
-                                    <option value="kabupaten3">Kabupaten 3</option>
+                                    {districts.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
                                 </select>
                             </div>
 
+                            {/* Row 3: Kecamatan | Desa */}
                             <div>
                                 <label htmlFor="kecamatan"
                                     className="block mb-2 text-sm font-medium text-gray-900">Kecamatan</label>
-                                <select name="kecamatan" id="kecamatan"
+                                <select name="kecamatan" id="kecamatan" value={subdistrict} onChange={handleSubdistrictChange} disabled={!district}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                                 >
                                     <option value="">Pilih kecamatan</option>
-                                    <option value="kecamatan1">Kecamatan 1</option>
-                                    <option value="kecamatan2">Kecamatan 2</option>
-                                    <option value="kecamatan3">Kecamatan 3</option>
+                                    {subdistricts.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
                                 </select>
                             </div>
 
-                            {/* Row 3: Desa | Nomor Whatsapp */}
                             <div>
                                 <label htmlFor="desa"
                                     className="block mb-2 text-sm font-medium text-gray-900">Desa</label>
-                                <select name="desa" id="desa"
+                                <select name="desa" id="desa" value={village} onChange={(event) => setVillage(event.target.value)} disabled={!subdistrict}
                                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
                                 >
                                     <option value="">Pilih desa</option>
-                                    <option value="desa1">Desa 1</option>
-                                    <option value="desa2">Desa 2</option>
-                                    <option value="desa3">Desa 3</option>
+                                    {villages.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
                                 </select>
                             </div>
 
@@ -109,7 +121,8 @@ export default function FormBabyProfile({onSubmit}) {
                             </div>
 
                             {/* Full width: Email */}
-                            <div className="md:col-span-2">
+
+                            <div>
                                 <label htmlFor="email"
                                     className="block mb-2 text-sm font-medium text-gray-900">Email</label>
                                 <input type="email" name="email" id="email"
