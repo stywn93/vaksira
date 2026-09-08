@@ -1,13 +1,17 @@
 import logoUrl from "../../public/favicon.svg"
 import { Toaster } from "react-hot-toast"
 import { useWilayah } from "../libs/hooks/useWilayah.js"
+import { useRef } from "react"
+import ReCAPTCHA from "react-google-recaptcha"
 
-export default function FormBabyProfile({onSubmit}) {
-  const {
-    provinces, districts, subdistricts, villages,
-    province, district, subdistrict, village,
-    handleProvinceChange, handleDistrictChange, handleSubdistrictChange, setVillage,
-  } = useWilayah()
+export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptchaKey }) {
+    const recaptchaRef = useRef(null)
+
+    const {
+        provinces, districts, subdistricts, villages,
+        province, district, subdistrict, village,
+        handleProvinceChange, handleDistrictChange, handleSubdistrictChange, setVillage,
+    } = useWilayah()
 
   return (
     <section>
@@ -130,6 +134,13 @@ export default function FormBabyProfile({onSubmit}) {
                                     placeholder="Masukkan email"
                                 />
                             </div>
+
+                            <ReCAPTCHA
+                                key={recaptchaKey}
+                                ref={recaptchaRef}
+                                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // or process.env.REACT_APP_...
+                                onChange={onRecaptchaChange}
+                            />
 
                         </div>
 
