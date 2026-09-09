@@ -111,7 +111,7 @@ const LandingPage = () => {
 
         {/* Footer Subtle */}
         <footer className="px-8 py-6 md:px-12 text-center md:text-left border-t border-slate-50/80 flex flex-col md:flex-row justify-between items-center text-xs font-bold text-gray-900 uppercase tracking-widest bg-white/10 backdrop-blur-sm">
-            <div>© 2026 VAKSIRA — VAKSIN REMINDER ASSISTANT</div>
+            <div>© 2026 VAKSIRA — Dinas Kesehatan Kabupaten Situbondo</div>
             <div className="flex gap-6 mt-4 md:mt-0">
                 <a href="#" className="hover:text-slate-500 transition-colors">Kebijakan Privasi</a>
                 <a href="#" className="hover:text-slate-500 transition-colors">Ketentuan Layanan</a>
