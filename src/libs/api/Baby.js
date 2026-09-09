@@ -12,3 +12,14 @@ export const insertBaby = async (payload) => {
         body: JSON.stringify(payload)
     })
 }
+
+export const getSchedule = async (id) => {
+
+    return await fetch(`${apiBaseUrl}/get-schedule/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer`
+        }
+    })
+}

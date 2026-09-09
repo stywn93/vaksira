@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast"
 import './index.css'
 
 import FormGenerateReminder from './FormGenerateReminder.jsx'
-import FormBabyProfile from './components/FormBabyProfile'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ImmunizationSchedule from './components/ImmunizationSchedule.jsx'
 
@@ -15,7 +14,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<FormGenerateReminder/>} />
-        <Route path='/immunization-schedule' element={<ImmunizationSchedule/>}/>
+        <Route path='/immunization-schedule/:id' element={<ImmunizationSchedule/>}/>
       </Routes>
     </BrowserRouter>
     {/* <FormGenerateReminder /> */}
