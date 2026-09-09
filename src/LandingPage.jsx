@@ -14,7 +14,7 @@ const LandingPage = () => {
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
 
       {/* Main Browser-like Container */}
-      <div className="relative z-10 w-full max-w-7xl h-full min-h-[85vh] bg-white/95 backdrop-blur-md rounded-[40px] shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative z-10 w-full max-w-7xl h-full min-h-[85vh] bg-white/80 backdrop-blur-2xl rounded-[40px] border border-white/70 shadow-[0_30px_90px_rgba(30,58,138,0.22)] overflow-hidden flex flex-col">
         
         {/* Decorative Leaf (CSS Blur) */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-teal-200/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
@@ -28,9 +28,9 @@ const LandingPage = () => {
         </div>
 
         {/* Header/Navbar */}
-        <header className="relative z-10 flex items-center justify-between px-8 py-6 md:px-12">
+        <header className="relative z-10 flex items-center justify-between px-8 py-6 md:px-12 backdrop-blur-xl border-b border-white/40">
           <div className="flex items-center gap-2">
-            <div className="bg-[#0bb6c2] p-1.5 rounded-lg">
+            <div className="bg-[#0bb6c2] p-1.5 rounded-lg shadow-lg shadow-teal-200/70">
                 <img src={logoUrl} alt="Vaksira Logo" className="w-6 h-6 invert brightness-0" />
             </div>
             <span className="text-xl font-bold tracking-tight text-[#1e3a8a]">Vaksira</span>
@@ -49,7 +49,7 @@ const LandingPage = () => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
               <span>(081) 123-4567</span>
             </div>
-            <Link to="/generate-reminder" className="bg-[#0bb6c2] text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#099da8] transition-all shadow-lg shadow-teal-100">
+            <Link to="/generate-reminder" className="bg-[#0bb6c2] text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#099da8] transition-all shadow-lg shadow-teal-100/80">
               Mulai Sekarang
             </Link>
           </div>
@@ -110,7 +110,7 @@ const LandingPage = () => {
         </main>
 
         {/* Footer Subtle */}
-        <footer className="px-8 py-6 md:px-12 text-center md:text-left border-t border-slate-50 flex flex-col md:flex-row justify-between items-center text-xs font-bold text-slate-300 uppercase tracking-widest">
+        <footer className="px-8 py-6 md:px-12 text-center md:text-left border-t border-slate-50/80 flex flex-col md:flex-row justify-between items-center text-xs font-bold text-gray-900 uppercase tracking-widest bg-white/10 backdrop-blur-sm">
             <div>© 2026 VAKSIRA — VAKSIN REMINDER ASSISTANT</div>
             <div className="flex gap-6 mt-4 md:mt-0">
                 <a href="#" className="hover:text-slate-500 transition-colors">Kebijakan Privasi</a>
