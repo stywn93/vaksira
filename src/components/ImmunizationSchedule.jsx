@@ -1,58 +1,27 @@
-import { useParams } from "react-router-dom";
-import { useSchedule } from "../libs/hooks/useSchedule.js";
-
-const BULAN_ID = [
-  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-  "Juli", "Agustus", "September", "Oktober", "November", "Desember",
-];
-
-function formatTanggal(dateInput) {
-  if (!dateInput) return null;
-  const d = dateInput instanceof Date ? dateInput : new Date(dateInput);
-  if (Number.isNaN(d.getTime())) return null;
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${dd} ${BULAN_ID[d.getMonth()]} ${d.getFullYear()}`;
-}
-
-function formatRentang(mulai, selesai) {
-  const a = formatTanggal(mulai);
-  const b = formatTanggal(selesai);
-  if (!a && !b) return "-";
-  if (a && !b) return `Mulai ${a}`;
-  if (!a && b) return `Sampai ${b}`;
-  return `${a} - ${b}`;
-}
-
-const GENDER_LABEL = { L: "Laki-laki", P: "Perempuan" };
+import { PDFDownloadLink } from "@react-pdf/renderer"
+import { useParams } from "react-router-dom"
+import { useSchedule } from "../libs/hooks/useSchedule.js"
+import ImmunizationSchedulePdf from "./ImmunizationSchedulePdf.jsx"
+import {
+  createBabyInfoItems,
+  formatRentang,
+} from "../libs/immunization/formatters.js"
 
 export default function ImmunizationSchedule() {
-  const { id } = useParams();
-  const { schedules, loading } = useSchedule(id);
-  const data = schedules[0] ?? {};
-
-  const infoItems = [
-    ["Nama Ibu", data.mother_name],
-    ["Tanggal Lahir", formatTanggal(data.dob_baby)],
-    ["Jenis Kelamin", GENDER_LABEL[data.gender_baby] ?? data.gender_baby],
-    ["Provinsi", data.province_name],
-    ["Kabupaten", data.district_name],
-    ["Kecamatan", data.subdistrict_name],
-    ["Desa", data.village_name],
-    ["Nomor WhatsApp", data.whatsapp],
-    ["Email", data.email],
-  ];
+  const { id } = useParams()
+  const { schedules, loading } = useSchedule(id)
+  const data = schedules[0] ?? {}
+  const infoItems = createBabyInfoItems(data)
 
   return (
     <div className="min-h-screen bg-slate-100 py-8 px-4">
       <div className="mx-auto max-w-4xl bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
         {/* Header */}
         <div className="border-b border-slate-200 px-6 py-5">
-          <p className="text-xs font-semibold tracking-wide text-teal-700 uppercase">
-            Aplikasi Reminder Imunisasi
-          </p>
-          <h1 className="mt-1 text-xl font-semibold text-slate-900">
+          <h1 className="mt-1 text-xl font-semibold text-slate-900">Vaksira</h1>
+          <h2 className="mt-1 text-xl font-semibold text-slate-900">
             Jadwal Imunisasi Bayi
-          </h1>
+          </h2>
         </div>
 
         {/* Info bayi */}
@@ -94,10 +63,10 @@ export default function ImmunizationSchedule() {
                   <td className="px-4 py-3 text-slate-700 align-top">
                     {formatRentang(schedule.ideal_start_date, schedule.ideal_end_date)}
                   </td>
-                  <td className="px-4 py-3 text-slate-700 align-top">
+                  <td className="bg-orange-50 px-4 py-3 text-slate-700 align-top">
                     {formatRentang(schedule.catchup_start_date, schedule.catchup_end_date)}
                   </td>
-                  <td className="px-4 py-3 text-slate-700 align-top">
+                  <td className="bg-red-50 px-4 py-3 text-slate-700 align-top">
                     {formatRentang(schedule.last_catchup_start_date, schedule.last_catchup_end_date)}
                   </td>
                 </tr>
@@ -113,14 +82,16 @@ export default function ImmunizationSchedule() {
         </div>
 
         {/* Footer note */}
-        <div className="border-t border-slate-200 px-6 py-4">
-          <p className="text-xs text-slate-500 leading-relaxed">
-            Simpan halaman ini dan hubungkan file .ics ke kalender HP Anda
-            agar mendapat pengingat otomatis. Reminder juga akan dikirim
-            melalui WhatsApp.
-          </p>
+        <div className="border-t border-slate-200 px-6 py-4 flex items-center justify-between gap-4">
+          <PDFDownloadLink
+            document={<ImmunizationSchedulePdf schedules={schedules} />}
+            fileName="immunization-schedule.pdf"
+            className="shrink-0 rounded-md bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+          >
+            {({ loading: generating }) => generating ? "Menyiapkan PDF..." : "Export PDF"}
+          </PDFDownloadLink>
         </div>
       </div>
     </div>
-  );
+  )
 }
