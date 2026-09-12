@@ -4,21 +4,27 @@ import {
   formatRentang,
 } from "../libs/immunization/formatters.js"
 
+const BRAND_COLOR = "#0bb6c2"
+const NEUTRAL_TEXT = "rgba(0,0,0,0.88)"
+const SECONDARY_TEXT = "rgba(0,0,0,0.65)"
+const BORDER_COLOR = "#f0f0f0"
+
 const styles = StyleSheet.create({
-  page: { padding: 24, fontSize: 8, color: "#1e293b" },
-  title: { fontSize: 16, fontWeight: 700, marginBottom: 2 },
-  subtitle: { fontSize: 12, fontWeight: 700, marginBottom: 10 },
+  page: { padding: 24, fontSize: 8, color: NEUTRAL_TEXT, backgroundColor: "#ffffff" },
+  title: { fontSize: 16, fontWeight: 700, color: NEUTRAL_TEXT, marginBottom: 2 },
+  subtitle: { fontSize: 12, fontWeight: 700, color: SECONDARY_TEXT, marginBottom: 10 },
   info: { flexDirection: "row", flexWrap: "wrap", marginBottom: 10 },
   infoItem: { width: "50%", flexDirection: "row", marginBottom: 2 },
-  infoLabel: { width: 82, color: "#64748b" },
-  infoValue: { flex: 1, fontWeight: 700 },
-  table: { borderWidth: 1, borderColor: "#cbd5e1" },
-  row: { flexDirection: "row", borderBottomWidth: 1, borderColor: "#cbd5e1" },
-  header: { backgroundColor: "#1e293b", color: "#ffffff", fontWeight: 700 },
-  cell: { width: "25%", padding: 3 },
+  infoLabel: { width: 82, color: SECONDARY_TEXT },
+  infoValue: { flex: 1, fontWeight: 700, color: NEUTRAL_TEXT },
+  table: { borderWidth: 1, borderColor: BORDER_COLOR },
+  row: { flexDirection: "row", borderBottomWidth: 1, borderColor: BORDER_COLOR },
+  header: { backgroundColor: "#1f1f1f", color: "#ffffff", fontWeight: 700 },
+  cell: { width: "25%", padding: 3, color: NEUTRAL_TEXT },
   catchupCell: { backgroundColor: "#fff7ed" },
-  lastCatchupCell: { backgroundColor: "#fef2f2" },
+  lastCatchupCell: { backgroundColor: "#fff1f0" },
   lastRow: { borderBottomWidth: 0 },
+  brandLine: { color: BRAND_COLOR, fontWeight: 700 },
 })
 
 export default function ImmunizationSchedulePdf({ schedules = [] }) {

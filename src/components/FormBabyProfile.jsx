@@ -1,161 +1,208 @@
-import logoUrl from "../../public/favicon.svg"
 import { Toaster } from "react-hot-toast"
 import { useWilayah } from "../libs/hooks/useWilayah.js"
 import { useRef } from "react"
 import ReCAPTCHA from "react-google-recaptcha"
+import { Button, Col, ConfigProvider, Input, Radio, Row, Select, Space, Typography } from "antd"
+import MainLayout, { MainHeader, MainFooter } from "./MainLayout.jsx"
+
+const { Title, Text } = Typography
+const { Option } = Select
+
+const BRAND_COLOR = "#0bb6c2"
 
 export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptchaKey }) {
-    const recaptchaRef = useRef(null)
+  const recaptchaRef = useRef(null)
 
-    const {
-        provinces, districts, subdistricts, villages,
-        province, district, subdistrict, village,
-        handleProvinceChange, handleDistrictChange, handleSubdistrictChange, setVillage,
-    } = useWilayah()
+  const {
+    provinces, districts, subdistricts, villages,
+    province, district, subdistrict, village,
+    handleProvinceChange, handleDistrictChange, handleSubdistrictChange, setVillage,
+  } = useWilayah()
 
   return (
-    <section>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: BRAND_COLOR,
+          borderRadius: 8,
+          fontFamily: "Inter, sans-serif",
+        },
+      }}
+    >
+      <section>
         <Toaster position="top-center" />
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <img className="w-8 h-8 mr-2" src={logoUrl} alt="logo"/>
-            <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-                Vaksira &mdash; <em>Vaksin Reminder Assistant</em>
-            </a>
+        <MainLayout header={<MainHeader />} footer={<MainFooter />}>
+          <Space direction="vertical" size={24} style={{ width: "100%", maxWidth: 960 }}>
             <div
-                className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md md:max-w-2xl xl:p-0">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                        Buat Profil Bayi
-                    </h1>
-                    <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
+              style={{
+                width: "100%",
+                background: "#fff",
+                borderRadius: 8,
+                border: "1px solid #f0f0f0",
+                boxShadow: "0 6px 16px rgba(0,0,0,0.06)",
+                overflow: "hidden",
+              }}
+            >
+              <div style={{ padding: "48px" }}>
+                <Title level={2} style={{ marginBottom: 24, color: "rgba(0,0,0,0.88)" }}>
+                  Buat Profil Bayi
+                </Title>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form onSubmit={onSubmit}>
+                  <Row gutter={[32, 24]}>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Nama Ibu</Text>
+                        <Input
+                          name="namaIbu"
+                          id="namaIbu"
+                          placeholder="Masukkan nama ibu"
+                          required
+                          style={{ width: "100%" }}
+                        />
+                      </Space>
+                    </Col>
 
-                            {/* Row 1: Nama Ibu | Tanggal Lahir Bayi */}
-                            <div>
-                                <label htmlFor="namaIbu"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Nama Ibu</label>
-                                <input type="text" name="namaIbu" id="namaIbu"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                    placeholder="Masukkan nama ibu"
-                                    required=""
-                                />
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Tanggal lahir bayi</Text>
+                        <Input
+                          type="date"
+                          name="tanggalLahirBayi"
+                          id="tanggalLahirBayi"
+                          style={{ width: "100%" }}
+                        />
+                      </Space>
+                    </Col>
 
-                            <div>
-                                <label htmlFor="tanggalLahirBayi"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Tanggal lahir bayi</label>
-                                <input type="date" name="tanggalLahirBayi" id="tanggalLahirBayi"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                />
-                            </div>
+                    <Col span={24}>
+                      <Space direction="vertical" size={8}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Jenis kelamin bayi</Text>
+                        <Radio.Group name="jenisKelaminBayi" defaultValue="L">
+                          <Space size={24}>
+                            <Radio value="L" id="jenisKelaminBayi">Laki-laki</Radio>
+                            <Radio value="P" id="jenisKelaminBayi2">Perempuan</Radio>
+                          </Space>
+                        </Radio.Group>
+                      </Space>
+                    </Col>
 
-                            {/* Full width: Jenis Kelamin Bayi (radio group) */}
-                            <div className="md:col-span-2">
-                                <label className="block mb-2 text-sm font-medium text-gray-900">Jenis kelamin bayi</label>
-                                <div className="flex items-center gap-6">
-                                    <div className="flex items-center">
-                                        <input type="radio" name="jenisKelaminBayi" value="L" id="jenisKelaminBayi"
-                                            className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 focus:ring-2"
-                                        />
-                                        <label htmlFor="jenisKelaminBayi" className="ml-2 text-sm font-medium text-gray-900">Laki-laki</label>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <input type="radio" name="jenisKelaminBayi" value="P" id="jenisKelaminBayi2"
-                                            className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 focus:ring-2"
-                                        />
-                                        <label htmlFor="jenisKelaminBayi2" className="ml-2 text-sm font-medium text-gray-900">Perempuan</label>
-                                    </div>
-                                </div>
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Provinsi</Text>
+                        <Select
+                          value={province || undefined}
+                          onChange={(value) => handleProvinceChange({ target: { value } })}
+                          placeholder="Pilih provinsi"
+                          style={{ width: "100%" }}
+                          allowClear
+                        >
+                          {provinces.map((region) => (
+                            <Option key={region.code} value={region.code}>{region.name}</Option>
+                          ))}
+                        </Select>
+                      </Space>
+                    </Col>
 
-                            {/* Row 2: Provinsi | Kabupaten */}
-                            <div>
-                                <label htmlFor="provinsi"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Provinsi</label>
-                                <select name="provinsi" id="provinsi" value={province} onChange={handleProvinceChange}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                >
-                                    <option value="">Pilih provinsi</option>
-                                    {provinces.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
-                                </select>
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Kabupaten</Text>
+                        <Select
+                          value={district || undefined}
+                          onChange={(value) => handleDistrictChange({ target: { value } })}
+                          placeholder="Pilih kabupaten"
+                          disabled={!province}
+                          style={{ width: "100%" }}
+                          allowClear
+                        >
+                          {districts.map((region) => (
+                            <Option key={region.code} value={region.code}>{region.name}</Option>
+                          ))}
+                        </Select>
+                      </Space>
+                    </Col>
 
-                            <div>
-                                <label htmlFor="kabupaten"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Kabupaten</label>
-                                <select name="kabupaten" id="kabupaten" value={district} onChange={handleDistrictChange} disabled={!province}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                >
-                                    <option value="">Pilih kabupaten</option>
-                                    {districts.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
-                                </select>
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Kecamatan</Text>
+                        <Select
+                          value={subdistrict || undefined}
+                          onChange={(value) => handleSubdistrictChange({ target: { value } })}
+                          placeholder="Pilih kecamatan"
+                          disabled={!district}
+                          style={{ width: "100%" }}
+                          allowClear
+                        >
+                          {subdistricts.map((region) => (
+                            <Option key={region.code} value={region.code}>{region.name}</Option>
+                          ))}
+                        </Select>
+                      </Space>
+                    </Col>
 
-                            {/* Row 3: Kecamatan | Desa */}
-                            <div>
-                                <label htmlFor="kecamatan"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Kecamatan</label>
-                                <select name="kecamatan" id="kecamatan" value={subdistrict} onChange={handleSubdistrictChange} disabled={!district}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                >
-                                    <option value="">Pilih kecamatan</option>
-                                    {subdistricts.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
-                                </select>
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Desa</Text>
+                        <Select
+                          value={village || undefined}
+                          onChange={(value) => setVillage(value)}
+                          placeholder="Pilih desa"
+                          disabled={!subdistrict}
+                          style={{ width: "100%" }}
+                          allowClear
+                        >
+                          {villages.map((region) => (
+                            <Option key={region.code} value={region.code}>{region.name}</Option>
+                          ))}
+                        </Select>
+                      </Space>
+                    </Col>
 
-                            <div>
-                                <label htmlFor="desa"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Desa</label>
-                                <select name="desa" id="desa" value={village} onChange={(event) => setVillage(event.target.value)} disabled={!subdistrict}
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                >
-                                    <option value="">Pilih desa</option>
-                                    {villages.map((region) => <option key={region.code} value={region.code}>{region.name}</option>)}
-                                </select>
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Nomor Whatsapp</Text>
+                        <Input
+                          type="text"
+                          name="nomorWhatsapp"
+                          id="nomorWhatsapp"
+                          placeholder="Masukkan nomor whatsapp"
+                          style={{ width: "100%" }}
+                        />
+                      </Space>
+                    </Col>
 
-                            <div>
-                                <label htmlFor="nomorWhatsapp"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Nomor Whatsapp</label>
-                                <input type="text" name="nomorWhatsapp" id="nomorWhatsapp"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                    placeholder="Masukkan nomor whatsapp"
-                                />
-                            </div>
+                    <Col xs={24} md={12}>
+                      <Space direction="vertical" size={8} style={{ width: "100%" }}>
+                        <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Email</Text>
+                        <Input
+                          type="email"
+                          name="email"
+                          id="email"
+                          placeholder="Masukkan email"
+                          style={{ width: "100%" }}
+                        />
+                      </Space>
+                    </Col>
 
-                            {/* Full width: Email */}
+                    <Col span={24}>
+                      <ReCAPTCHA
+                        key={recaptchaKey}
+                        ref={recaptchaRef}
+                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                        onChange={onRecaptchaChange}
+                      />
+                    </Col>
+                  </Row>
 
-                            <div>
-                                <label htmlFor="email"
-                                    className="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                                <input type="email" name="email" id="email"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5"
-                                    placeholder="Masukkan email"
-                                />
-                            </div>
-
-                            <ReCAPTCHA
-                                key={recaptchaKey}
-                                ref={recaptchaRef}
-                                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // or process.env.REACT_APP_...
-                                onChange={onRecaptchaChange}
-                            />
-
-                        </div>
-
-                        {/* <div className="flex justify-end">
-                            <Link to="/immunization-schedule"
-                            className="text-sm font-medium text-indigo-600 hover:underline">Sudah pernah buat? Klik di sini</Link>
-                        </div> */}
-                        <button type="submit"
-                                className="cursor-pointer w-full text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed">
-                            Simpan & Generate
-                        </button>
-                    </form>
-                </div>
+                  <Button type="primary" htmlType="submit" style={{ width: "100%", marginTop: 24, height: 40 }}>
+                    Simpan &amp; Generate
+                  </Button>
+                </form>
+              </div>
             </div>
-        </div>
-    </section>
-  );
+          </Space>
+        </MainLayout>
+      </section>
+    </ConfigProvider>
+  )
 }
