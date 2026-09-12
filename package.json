@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.9.0",
+    "@shadcn/ui": "^0.0.4",
     "@tailwindcss/vite": "^4.3.3",
+    "antd": "^6.6.3",
     "html-to-image": "^1.11.13",
     "jspdf": "^4.2.1",
     "react": "^19.2.8",
@@ -19,6 +21,7 @@
     "react-google-recaptcha": "^3.1.0",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.18.3",
+    "shadcn-svelte": "^1.6.1",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
