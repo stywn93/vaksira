@@ -1,6 +1,5 @@
 import { Layout, Menu, Typography, Space, Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { PhoneOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import logoUrl from '../../public/favicon.svg';
 
 const { Header, Content, Footer } = Layout;
@@ -29,10 +28,12 @@ export function MainHeader({ navItems = defaultNavItems }) {
         height: 64,
       }}
     >
-      <Space align="center" size={10}>
-        <img src={logoUrl} alt="Vaksira Logo" style={{ width: 24, height: 24 }} />
-        <Text strong style={{ fontSize: 18, color: '#1e3a8a' }}>Vaksira</Text>
-      </Space>
+      <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+        <Space align="center" size={10}>
+          <img src={logoUrl} alt="Vaksira Logo" style={{ width: 24, height: 24 }} />
+          <Text strong style={{ fontSize: 18, color: '#1e3a8a' }}>Vaksira</Text>
+        </Space>
+      </Link>
 
       <Menu
         mode="horizontal"
@@ -42,8 +43,6 @@ export function MainHeader({ navItems = defaultNavItems }) {
 
       <Space size={24} align="center">
         <Space size={6} style={{ color: 'rgba(0,0,0,0.65)' }}>
-          <PhoneOutlined />
-          <Text>(081) 123-4567</Text>
         </Space>
         <Link to="/generate-reminder">
           <Button type="primary">Mulai Sekarang</Button>

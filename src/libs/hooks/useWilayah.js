@@ -39,8 +39,9 @@ export function useWilayah() {
         return loadRegions(() => getRegionsByParent(subdistrict), setVillages)
     }, [subdistrict])
 
-    const handleProvinceChange = (event) => {
-        setProvince(event.target.value)
+    const handleProvinceChange = (value) => {
+        const nextValue = value ?? ""
+        setProvince(nextValue)
         setDistrict("")
         setSubdistrict("")
         setVillage("")
@@ -49,16 +50,18 @@ export function useWilayah() {
         setVillages([])
     }
 
-    const handleDistrictChange = (event) => {
-        setDistrict(event.target.value)
+    const handleDistrictChange = (value) => {
+        const nextValue = value ?? ""
+        setDistrict(nextValue)
         setSubdistrict("")
         setVillage("")
         setSubdistricts([])
         setVillages([])
     }
 
-    const handleSubdistrictChange = (event) => {
-        setSubdistrict(event.target.value)
+    const handleSubdistrictChange = (value) => {
+        const nextValue = value ?? ""
+        setSubdistrict(nextValue)
         setVillage("")
         setVillages([])
     }

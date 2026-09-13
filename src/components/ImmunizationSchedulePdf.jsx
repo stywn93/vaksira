@@ -17,10 +17,22 @@ const styles = StyleSheet.create({
   infoItem: { width: "50%", flexDirection: "row", marginBottom: 2 },
   infoLabel: { width: 82, color: SECONDARY_TEXT },
   infoValue: { flex: 1, fontWeight: 700, color: NEUTRAL_TEXT },
-  table: { borderWidth: 1, borderColor: BORDER_COLOR },
+  table: { borderWidth: 1, borderColor: BORDER_COLOR, width: "100%" },
   row: { flexDirection: "row", borderBottomWidth: 1, borderColor: BORDER_COLOR },
-  header: { backgroundColor: "#1f1f1f", color: "#ffffff", fontWeight: 700 },
-  cell: { width: "25%", padding: 3, color: NEUTRAL_TEXT },
+  header: { backgroundColor: "#ffffff", color: "#ffffff", fontWeight: 700 },
+  cell: { width: "23%", padding: 3, color: NEUTRAL_TEXT },
+  numberCell: { width: "7%", padding: 3, color: NEUTRAL_TEXT, textAlign: "center" },
+  checkboxBox: {
+    width: 8,
+    height: 8,
+    borderWidth: 1,
+    borderColor: NEUTRAL_TEXT,
+    marginLeft: 4,
+    marginRight: 4,
+    alignSelf: "center",
+    backgroundColor: "#ffffff",
+  },
+  checkboxCell: { width: "5%", padding: 3, color: NEUTRAL_TEXT, textAlign: "center" },
   catchupCell: { backgroundColor: "#fff7ed" },
   lastCatchupCell: { backgroundColor: "#fff1f0" },
   lastRow: { borderBottomWidth: 0 },
@@ -32,8 +44,8 @@ export default function ImmunizationSchedulePdf({ schedules = [] }) {
 
   return (
     <Document title="Jadwal Imunisasi Bayi">
-      <Page size="A4" style={styles.page}>
-        <Text style={styles.title}>Vaksira</Text>
+      <Page size="A4" orientation="landscape" style={styles.page}>
+        <Text style={styles.title}>Vaksira - Vaksin Reminder Assistant</Text>
         <Text style={styles.subtitle}>Jadwal Imunisasi Bayi</Text>
 
         <View style={styles.info}>
@@ -47,6 +59,7 @@ export default function ImmunizationSchedulePdf({ schedules = [] }) {
 
         <View style={styles.table} wrap={false}>
           <View style={[styles.row, styles.header]}>
+            <Text style={styles.numberCell}>#</Text>
             <Text style={styles.cell}>Nama Vaksin</Text>
             <Text style={styles.cell}>Periode Ideal</Text>
             <Text style={styles.cell}>Periode Susulan</Text>
@@ -57,6 +70,7 @@ export default function ImmunizationSchedulePdf({ schedules = [] }) {
               key={`${schedule.id_registration}-${schedule.antigen_name}`}
               style={[styles.row, index === schedules.length - 1 && styles.lastRow]}
             >
+              <View style={styles.numberCell}><View style={styles.checkboxBox} /></View>
               <Text style={styles.cell}>{schedule.antigen_name ?? "-"}</Text>
               <Text style={styles.cell}>{formatRentang(schedule.ideal_start_date, schedule.ideal_end_date)}</Text>
               <Text style={[styles.cell, styles.catchupCell]}>{formatRentang(schedule.catchup_start_date, schedule.catchup_end_date)}</Text>

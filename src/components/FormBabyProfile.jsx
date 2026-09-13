@@ -49,6 +49,11 @@ export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptcha
                 </Title>
 
                 <form onSubmit={onSubmit}>
+                  <input type="hidden" name="provinsi" value={province} />
+                  <input type="hidden" name="kabupaten" value={district} />
+                  <input type="hidden" name="kecamatan" value={subdistrict} />
+                  <input type="hidden" name="desa" value={village} />
+
                   <Row gutter={[32, 24]}>
                     <Col xs={24} md={12}>
                       <Space direction="vertical" size={8} style={{ width: "100%" }}>
@@ -92,7 +97,7 @@ export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptcha
                         <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Provinsi</Text>
                         <Select
                           value={province || undefined}
-                          onChange={(value) => handleProvinceChange({ target: { value } })}
+                          onChange={handleProvinceChange}
                           placeholder="Pilih provinsi"
                           style={{ width: "100%" }}
                           allowClear
@@ -109,7 +114,7 @@ export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptcha
                         <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Kabupaten</Text>
                         <Select
                           value={district || undefined}
-                          onChange={(value) => handleDistrictChange({ target: { value } })}
+                          onChange={handleDistrictChange}
                           placeholder="Pilih kabupaten"
                           disabled={!province}
                           style={{ width: "100%" }}
@@ -127,7 +132,7 @@ export default function FormBabyProfile({ onSubmit, onRecaptchaChange, recaptcha
                         <Text strong style={{ color: "rgba(0,0,0,0.88)" }}>Kecamatan</Text>
                         <Select
                           value={subdistrict || undefined}
-                          onChange={(value) => handleSubdistrictChange({ target: { value } })}
+                          onChange={handleSubdistrictChange}
                           placeholder="Pilih kecamatan"
                           disabled={!district}
                           style={{ width: "100%" }}
