@@ -45,7 +45,7 @@ export default function ImmunizationSchedulePdf({ schedules = [] }) {
   return (
     <Document title="Jadwal Imunisasi Bayi">
       <Page size="A4" orientation="landscape" style={styles.page}>
-        <Text style={styles.title}>Vaksira</Text>
+        <Text style={styles.title}>Vaksira - Vaksin Reminder Assistant</Text>
         <Text style={styles.subtitle}>Jadwal Imunisasi Bayi</Text>
 
         <View style={styles.info}>
