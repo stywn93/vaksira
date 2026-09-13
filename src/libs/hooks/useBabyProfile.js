@@ -27,7 +27,7 @@ export async function submitBabyProfile({ data, token, reset, navigate }) {
         if (typeof reset === "function") {
             reset()
         }
-        navigate(`/immunization-schedule/${body.data.registration.id}`)
+        navigate(`/immunization-schedule/${body.data.registration.token}`)
     } else {
         toast.error("Gagal menyimpan profil bayi.")
     }
