@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 *.code-workspace
 package-lock.json
+STYLE.md
+SKILL.md
+AGENTS.md
