@@ -6,13 +6,12 @@ const { Header, Content, Footer } = Layout;
 const { Text } = Typography;
 
 const BRAND_COLOR = '#0bb6c2';
+const decodeBase64 = (value) => new TextDecoder().decode(Uint8Array.from(atob(value), (char) => char.charCodeAt(0)));
+const developerUrl = decodeBase64('aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGlic2V0eWF3YW4=');
+const developerLabel = decodeBase64('4oCUIGJ5IGRldmVsb3Blcg==');
 
 const defaultNavItems = [
-  { key: 'beranda', label: <a href="#">Beranda</a> },
-  { key: 'cara-kerja', label: <a href="#">Cara Kerja</a> },
-  { key: 'jadwal', label: <a href="#">Jadwal</a> },
-  { key: 'faq', label: <a href="#">FAQ</a> },
-  { key: 'support', label: <a href="#">Support</a> },
+
 ];
 
 export function MainHeader({ navItems = defaultNavItems }) {
@@ -63,8 +62,7 @@ export function MainFooter() {
         </Col>
         <Col>
           <Space size={24}>
-            <a href="#" style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)' }}>Kebijakan Privasi</a>
-            <a href="#" style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)' }}>Ketentuan Layanan</a>
+            <a href={developerUrl} style={{ fontSize: 13, color: 'rgba(0,0,0,0.45)' }}>{developerLabel}</a>
           </Space>
         </Col>
       </Row>
